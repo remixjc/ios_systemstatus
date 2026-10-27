@@ -1,0 +1,47 @@
+# macOS
+.DS_Store
+._*
+.AppleDouble/
+.LSOverride
+
+# Local builds, screenshots, logs and distribution packages
+/build/
+/DerivedData/
+/artifacts/
+*.xcarchive/
+*.xcresult/
+*.ipa
+*.dSYM/
+*.dSYM.zip
+*.log
+
+# Xcode per-user state (keep projects and shared schemes)
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
+*.moved-aside
+
+# Swift Package Manager local state (keep Package.resolved if added)
+.build/
+.swiftpm/
+
+# Local credentials and signing material
+.env
+.env.*
+!.env.example
+*.p8
+*.p12
+*.pfx
+*.key
+*.cer
+*.mobileprovision
+*.provisionprofile
+/Secrets/
+
+# Editor state and temporary files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
