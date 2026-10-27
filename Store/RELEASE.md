@@ -9,9 +9,23 @@
 - 签名团队：6NZHLN3MUD（Bundle ID 已在当前登录的 App Store Connect 账号中核对）
 - 商店名称：系统状态 - 设备监测（“系统状态”被 App Store Connect 判定已被使用；桌面名称仍为“系统状态”）
 - Apple ID：6827463949；SKU：systemstatus-ios-001
-- 发布状态：已创建商店记录并保存部分资料；**构建上传失败、未提交审核、未上架**。
+- 发布状态：**1.0.0 (1) 已于 2026 年 10 月 27 日 17:06（北京时间）正式提交审核，当前为“等待审核”，尚未上架**。发行设置：中国大陆、免费、审核通过后自动发布。
 
-## App Store Connect 操作记录 · 2026-10-27
+## 补充操作记录 · 2026-10-27 17:06（北京时间）
+
+- Git 远端已改为 `git@github.com:remixjc/ios_systemstatus.git`，源码已推送；GitHub Pages 从 `main` 分支的 `docs/` 发布。
+- 隐私政策：`https://remixjc.github.io/ios_systemstatus/privacy.html`；支持页面：`https://remixjc.github.io/ios_systemstatus/support.html`。两个地址均已验证 HTTP 200。
+- App Store Connect 的隐私政策 URL 和技术支持 URL 已保存；隐私问卷发布结果显示“未收集数据”。
+- 审核联系人按用户提供的姓名、电话和邮箱填写；版权为 `2026 王成`。公开支持页展示开发者姓名和邮箱，不公开审核联系电话。
+- 已保存中国大陆基准价格 `¥0.00`；供应情况为 1 个地区“中国大陆 — App 发布时供应”，其余 174 个地区未供应。
+- 设置中加入可离线阅读的原生隐私政策和使用帮助，提供常见问题、邮件联系及网页版入口。
+- 包含上述页面的模拟器构建、Release 归档和 App Store 分发导出均成功。日志：`artifacts/build-help-pages.log`、`artifacts/archive-help-pages.log`、`artifacts/export-help-pages.log`。
+- 重新上传成功：日志 `artifacts/upload-help-pages.log` 显示 `Upload succeeded`；TestFlight 中的 `1.0.0 (1)` 已完成处理，此前的 Xcode 账号上传失败已解除。
+- 已关联构建并补充审核备注，所有必填项通过，执行“添加以供审核”及最终“提交以供审核”。成功页显示“已提交 1 个项目”，审核详情显示“等待审核”。
+- 提交 ID：`af03fe5f-91f1-42e6-af9d-98ecbb05f4d1`。详情：`https://appstoreconnect.apple.com/apps/6827463949/distribution/reviewsubmissions/details/af03fe5f-91f1-42e6-af9d-98ecbb05f4d1`。
+- 成功凭证：`artifacts/store-review-submitted.png`；审核详情：`artifacts/store-review-waiting.png`。截图属于本地产物，不提交仓库。
+
+## 早先 App Store Connect 操作记录 · 2026-10-27
 
 - 创建应用记录：`https://appstoreconnect.apple.com/apps/6827463949/distribution`
 - 已保存：简体中文介绍、推广文本、关键词、版本 1.0.0、副标题、工具/效率分类、无需登录、审核操作说明。
@@ -66,13 +80,13 @@
 - https://developer.apple.com/documentation/bundleresources/app-privacy-configuration/nsprivacyaccessedapitypes/nsprivacyaccessedapitype
 - https://developer.apple.com/help/app-store-connect/manage-submissions-to-app-review/submit-an-app-for-review/
 
-## 提交前的外部条件
+## 后续状态与未完成验证
 
-1. App Store Connect 网页已登录；需要账号所有者在 Xcode > Settings > Apple Accounts 登录，获得构建上传权限。无需向助手发送密码或验证码。
-2. 需确认免费或付费、首发地区、版权主体、审核联系人和有效支持联系方式；不从证书姓名推断这些发布信息。若面向中国大陆分发，需核对 App 备案条件和 ICP 备案号。
-3. 将已写好的隐私政策与帮助网页托管到开发者控制的公开 HTTPS 地址，在帮助网页加入有效联系方式，并在 App Store Connect 填写相应 URL。本次没有编造域名或联系邮箱。
-4. 商店记录、分类、年龄分级和部分资料已填写；截图已上传，需复核处理状态。继续补齐隐私 URL、分发信息、联系人并上传构建；复核隐私发布与加密信息。
-5. 完成上述专项适配和验收后，再提交审核。发布是苹果审核与开发者分发设置共同决定的结果，归档成功不等于上架。
+1. 等待苹果审核结果；如有拒审或补充资料要求，按实际问题处理。
+2. 账号列表此前提示有更新后的开发者协议待接受，本次最终提交已成功；未代签协议，相关账户义务仍由账号持有人核对。
+3. 面向中国大陆分发的 App 备案条件和 ICP 备案号仍需核对，未编造备案信息，本次提交校验未要求补填。
+4. iPhone Duo 专项适配与真机验收仍未完成，详见上文；不将通用自适应布局视为 Duo 验收完成。
+5. 发布取决于苹果审核和开发者分发设置；构建上传成功不等于已上架。
 
 ## 数据接口说明
 
