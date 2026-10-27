@@ -1,5 +1,8 @@
 {
-  "name": "系统状态",
+  "name": "系统状态 - 设备监测",
+  "displayName": "系统状态",
+  "appleId": "6827463949",
+  "sku": "systemstatus-ios-001",
   "subtitle": "实时设备指标，一眼掌握",
   "primaryCategory": "UTILITIES",
   "secondaryCategory": "PRODUCTIVITY",
