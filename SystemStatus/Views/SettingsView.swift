@@ -40,6 +40,10 @@ struct SettingsView: View {
                     LabeledContent("数据上传", value: "无自动上传")
                     LabeledContent("第三方 SDK", value: "无")
                 }
+                Section("帮助与支持") {
+                    NavigationLink("使用帮助与技术支持") { SupportView() }
+                    Link("联系开发者", destination: SupportLinks.email)
+                }
                 Section {
                     LabeledContent("版本", value: "1.0.0 (1)")
                     Text("系统状态是一款本地设备监测工具。指标仅反映公开接口可读取的信息，不提供硬件诊断结论。")
@@ -88,14 +92,56 @@ struct PrivacyView: View {
                 Text("生效日期：2026 年 10 月 27 日").foregroundStyle(.secondary)
                 Text("系统状态在你的设备上读取和展示系统指标，不注册账号，不自动上传数据，不包含广告、分析或追踪 SDK。")
                 Text("本地数据").font(.title3.bold())
-                Text("刷新频率、时钟格式和常亮选项保存在应用本地。CPU、网络等最近 60 秒的曲线仅保存在内存中，退出进程后消失。存储容量仅在设备内展示，不包含在导出报告中。")
+                Text("刷新频率、时钟格式和常亮选项保存在应用本地。CPU、网络等最近 60 秒的曲线仅保存在内存中，退出进程后消失。存储容量仅在设备内展示，不包含在导出报告中。卸载应用可删除已保存的设置。")
                 Text("你控制的分享").font(.title3.bold())
-                Text("只有你主动选择分享报告后，报告文本才交给你选择的应用或服务。报告预览展示完整分享内容，包含设备型号、系统版本及当时指标，不包含设备唯一标识符。分享目标将按其自身政策处理数据。")
+                Text("只有你主动选择分享报告后，报告文本才交给你选择的应用或服务。报告预览展示完整分享内容，包含设备类型、硬件型号、系统版本及当时指标，不包含设备唯一标识符。分享目标将按其自身政策处理数据。")
                 Text("权限与网络").font(.title3.bold())
-                Text("应用不申请定位、照片、联系人、麦克风或广告追踪权限。网络状态通过系统接口在本地读取，不向服务器发送探测请求。卸载应用可删除已保存的设置。")
+                Text("应用不申请定位、照片、联系人、麦克风或广告追踪权限。网络状态通过系统接口在本地读取，不向服务器发送探测请求。")
                 Text("反馈").font(.title3.bold())
-                Text("发布后可通过 App Store 产品页提供的支持渠道联系开发者。请勿在反馈中包含敏感信息。")
+                Text("开发者：王成。隐私问题或数据处理相关咨询，请发送邮件至 remixjc@foxmail.com。你主动发送的邮件和附件由邮件服务提供商传送，仅用于处理你的咨询；请勿提供密码、验证码或其他敏感信息。")
+                Link("联系开发者", destination: SupportLinks.email)
+                Text("政策更新").font(.title3.bold())
+                Text("应用功能或数据处理方式变化时，我们会更新隐私政策并注明生效日期。当前版本不收集、出售或共享用于追踪的个人数据。")
+                Link("查看网页版隐私政策", destination: SupportLinks.privacy)
             }.padding(24).frame(maxWidth: 700, alignment: .leading)
+                .textSelection(.enabled)
         }.navigationTitle("隐私政策").navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+private enum SupportLinks {
+    static let email = URL(string: "mailto:remixjc@foxmail.com")!
+    static let privacy = URL(string: "https://remixjc.github.io/ios_systemstatus/privacy.html")!
+    static let support = URL(string: "https://remixjc.github.io/ios_systemstatus/support.html")!
+}
+
+struct SupportView: View {
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 20) {
+                Text("使用帮助与技术支持").font(.largeTitle.bold())
+                Text("一屏查看设备状态。无广告、无追踪、无需注册，所有监测数据在设备本地处理。")
+                Text("如何查看指标来源？").font(.title3.bold())
+                Text("点按任意指标卡片，在详情页查看当前读数与数据说明。")
+                Text("为什么 CPU 或电量显示“—”？").font(.title3.bold())
+                Text("第一次采样尚未形成差值、系统限制访问、模拟器不提供读数时，应用会显示不可用，不会生成模拟数值。")
+                Text("网络累计与运营商账单为何不同？").font(.title3.bold())
+                Text("累计值只覆盖应用前台、未暂停时相邻有效采样间的网络接口差值。它不记录后台流量、历史账期和运营商计费规则。")
+                Text("如何节省电量？").font(.title3.bold())
+                Text("在设置中将刷新间隔设为 2 秒，并关闭屏幕常亮。进入后台后采样自动停止。")
+                Text("如何分享报告？").font(.title3.bold())
+                Text("在设置中选择“预览并分享报告”，确认文本后使用系统分享按钮。存储容量不会写入报告。")
+                NavigationLink("隐私政策") { PrivacyView() }
+                Text("联系开发者").font(.title3.bold())
+                Text("开发者：王成\n支持邮箱：remixjc@foxmail.com")
+                Link("通过邮件联系", destination: SupportLinks.email)
+                Text("反馈时请说明应用版本、iOS 版本、设备型号、操作步骤和预期结果。截图或报告由你自行决定是否提供；发送前请检查并移除敏感信息。请勿发送密码或验证码。")
+                Link("查看网页版帮助", destination: SupportLinks.support)
+                Text("最后更新：2026 年 10 月 27 日").foregroundStyle(.secondary)
+            }
+            .padding(24).frame(maxWidth: 700, alignment: .leading)
+            .textSelection(.enabled)
+        }
+        .navigationTitle("帮助与支持").navigationBarTitleDisplayMode(.inline)
     }
 }

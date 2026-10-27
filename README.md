@@ -32,8 +32,8 @@
 ## 获取与运行
 
 ```sh
-git clone https://remixjc.cn:888/remixjc/ios_systeminfo.git
-cd ios_systeminfo
+git clone git@github.com:remixjc/ios_systemstatus.git
+cd ios_systemstatus
 open SystemStatus.xcodeproj
 ```
 
@@ -96,7 +96,12 @@ xcodebuild -exportArchive \
 
 归档输出为 `artifacts/SystemStatus.xcarchive`，导出安装包为 `artifacts/AppStore/SystemStatus.ipa`。归档中间文件存放在本机 `~/Library/Developer/Xcode/DerivedData/SystemStatusArchive`，以避免同步目录的文件扩展属性干扰签名。
 
-商店中文文案位于 [metadata.json](Store/zh-Hans/metadata.json)，[隐私政策](Store/privacy.html) 与 [帮助网页](Store/support.html) 为待托管的静态页面。正式提交还需要开发者登录 App Store Connect，确认发布资料、有效支持联系方式和公开 HTTPS 网页地址，并完成适配与验收。不要把账号密码、API 私钥、签名证书或描述文件提交到仓库。
+商店中文文案位于 [metadata.json](Store/zh-Hans/metadata.json)。公开页面通过 GitHub Pages 从 `main` 分支的 `docs/` 目录发布：
+
+- [隐私政策](https://remixjc.github.io/ios_systemstatus/privacy.html)
+- [使用帮助与技术支持](https://remixjc.github.io/ios_systemstatus/support.html)
+
+页面源文件为 `Store/privacy.html` 和 `Store/support.html`，修改后运行 `zsh scripts/sync-store-pages.sh` 同步到 `docs/`。开发者仍需登录 Xcode 上传构建，并完成适配与验收。不要把账号密码、API 私钥、签名证书或描述文件提交到仓库。
 
 ## 数据范围与隐私
 
