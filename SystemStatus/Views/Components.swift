@@ -13,12 +13,12 @@ enum Palette {
 struct CardSurface: ViewModifier {
     func body(content: Content) -> some View {
         content
-            .padding(15)
+            .padding(12)
             .background {
-                RoundedRectangle(cornerRadius: 28, style: .continuous)
+                RoundedRectangle(cornerRadius: 23, style: .continuous)
                     .fill(Palette.card)
                     .overlay {
-                        RoundedRectangle(cornerRadius: 28, style: .continuous)
+                        RoundedRectangle(cornerRadius: 23, style: .continuous)
                             .strokeBorder(.white.opacity(0.10), lineWidth: 1)
                     }
             }
@@ -35,12 +35,13 @@ struct CardHeading: View {
     let color: Color
     var subtitle: String? = nil
     var body: some View {
-        HStack(spacing: 8) {
-            Image(systemName: icon).foregroundStyle(color).font(.system(size: 19, weight: .medium))
-            Text(title).font(.system(.subheadline, design: .rounded, weight: .semibold))
+        HStack(spacing: 6) {
+            Image(systemName: icon).foregroundStyle(color).font(.system(size: 15, weight: .medium))
+            Text(title).font(.system(size: 12, weight: .semibold, design: .rounded))
+                .lineLimit(1).minimumScaleFactor(0.8)
                 .foregroundStyle(.white.opacity(0.65))
             if let subtitle {
-                Text(subtitle).font(.caption2).foregroundStyle(.secondary)
+                Text(subtitle).font(.system(size: 9)).lineLimit(1).foregroundStyle(.secondary)
             }
             Spacer(minLength: 0)
         }
@@ -53,7 +54,7 @@ struct Legend: View {
     var body: some View {
         HStack(spacing: 5) {
             Circle().fill(color).frame(width: 6, height: 6)
-            Text(text).font(.caption).foregroundStyle(.white.opacity(0.7)).monospacedDigit()
+            Text(text).font(.system(size: 10)).foregroundStyle(.white.opacity(0.7)).monospacedDigit()
                 .lineLimit(1).minimumScaleFactor(0.65)
         }
     }
@@ -89,7 +90,7 @@ struct MiniGauge: View {
                 .stroke(color, style: StrokeStyle(lineWidth: 5, lineCap: .round))
         }
         .rotationEffect(.degrees(140))
-        .frame(width: 30, height: 30)
+        .frame(width: 23, height: 23)
         .accessibilityHidden(true)
     }
 }
@@ -145,7 +146,7 @@ struct LiveChart: View {
                 }
             }
         }
-        .frame(height: 64)
+        .frame(height: 54)
         .accessibilityHidden(true)
     }
 }
@@ -158,10 +159,10 @@ struct SmallMetricCard: View {
     var color: Color = .white
     var gauge: Double? = nil
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: 7) {
             CardHeading(title: title, icon: icon, color: .white.opacity(0.8))
             HStack(alignment: .center, spacing: 4) {
-                Text(value).font(.system(.title3, design: .rounded, weight: .bold))
+                Text(value).font(.system(size: 20, weight: .bold, design: .rounded))
                     .foregroundStyle(color)
                     .monospacedDigit()
                     .minimumScaleFactor(0.65)
@@ -169,12 +170,13 @@ struct SmallMetricCard: View {
                 Spacer(minLength: 0)
                 if let gauge { MiniGauge(value: gauge, color: color) }
             }
-            Text(subtitle).font(.caption).foregroundStyle(.secondary).lineLimit(2)
+            Text(subtitle).font(.system(size: 9)).foregroundStyle(.secondary)
+                .lineLimit(1).minimumScaleFactor(0.65)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .frame(maxWidth: .infinity, minHeight: 78, alignment: .topLeading)
+        .frame(maxWidth: .infinity, minHeight: 64, alignment: .topLeading)
         .cardSurface()
-        .contentShape(RoundedRectangle(cornerRadius: 28))
+        .contentShape(RoundedRectangle(cornerRadius: 23))
         .accessibilityElement(children: .combine)
     }
 }

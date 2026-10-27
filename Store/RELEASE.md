@@ -20,6 +20,10 @@
 
 ## 验证
 
+- 一屏布局更新：缩小首页字体、卡片与间距，竖屏展示时钟、CPU、网络、双列容量卡和两行三列状态卡；横屏重排。详情与设置继续使用系统字号。
+- 一屏布局验证：iOS 18.5 / iPhone SE（第 3 代）通过 5 项单元测试和 2 项 UI 测试。全部 10 张指标卡在竖屏、横屏均位于视口内、无需滚动且可点击，详情、暂停/恢复、设置、报告流程也通过。日志：`artifacts/test-one-screen-se.log`，结果：`artifacts/Tests-OneScreen-SE.xcresult`。
+- 在底部留白微调后，iOS 18.5 / iPhone 16 Pro 的一屏布局测试通过，额外验证底部说明也完整位于视口内。日志：`artifacts/test-one-screen-pro.log`，原始结果：`/tmp/SystemStatus-OneScreen-Pro.xcresult`，截图导出：`artifacts/QA-OneScreen-Pro/`。
+- 本轮首次 Pro UI 测试服务无响应，SE 末次重跑遇到 Mach 服务错误；保留日志，不将这些环境故障记为通过。之后在 Pro 上完成上述最新版布局复核。
 - 模拟器 Debug 构建成功。
 - 真机架构 Release 编译、归档成功，自动签名成功。
 - App Store Connect 分发导出成功；导出不代表已经上传或通过 App Store 验证。
