@@ -6,15 +6,22 @@ options:
 settings:
   base:
     SWIFT_VERSION: "5.0"
-    MARKETING_VERSION: "1.0.0"
-    CURRENT_PROJECT_VERSION: 1
+    MARKETING_VERSION: "1.1.0"
+    CURRENT_PROJECT_VERSION: 2
     DEVELOPMENT_TEAM: 6NZHLN3MUD
     CODE_SIGN_STYLE: Automatic
 targets:
   SystemStatus:
     type: application
     platform: iOS
-    sources: [SystemStatus]
+    sources: [SystemStatus, Shared]
+    entitlements:
+      path: SystemStatus/SystemStatus.entitlements
+      properties:
+        com.apple.security.application-groups: [group.com.chengwang.systemstatus]
+    dependencies:
+      - target: SystemStatusWidget
+        embed: true
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.chengwang.systemstatus
@@ -28,6 +35,33 @@ targets:
         INFOPLIST_KEY_UISupportedInterfaceOrientations: UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight
         INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad: UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+  SystemStatusWidget:
+    type: app-extension
+    platform: iOS
+    sources:
+      - SystemStatusWidget
+      - Shared
+      - SystemStatus/Models/Metrics.swift
+      - SystemStatus/Services/SystemReader.swift
+    entitlements:
+      path: SystemStatusWidget/SystemStatusWidget.entitlements
+      properties:
+        com.apple.security.application-groups: [group.com.chengwang.systemstatus]
+    info:
+      path: SystemStatusWidget/Info.plist
+      properties:
+        CFBundleDisplayName: 系统状态小组件
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.chengwang.systemstatus.widgets
+        TARGETED_DEVICE_FAMILY: "1,2"
+        APPLICATION_EXTENSION_API_ONLY: YES
+        SKIP_INSTALL: YES
+        GENERATE_INFOPLIST_FILE: YES
   SystemStatusTests:
     type: bundle.unit-test
     platform: iOS

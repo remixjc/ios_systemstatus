@@ -1,6 +1,74 @@
 import XCTest
 
 final class SystemStatusUITests: XCTestCase {
+    @MainActor func testWidgetSizesAndSavedSettings() {
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["settingsButton"].tap()
+        let entry = app.buttons["widgetSettingsLink"]
+        if !entry.isHittable { app.swipeUp() }
+        entry.tap()
+        XCTAssertTrue(app.navigationBars["桌面小组件"].waitForExistence(timeout: 5))
+        app.buttons["widgetStylePicker"].tap()
+        app.buttons["基础仪表盘"].tap()
+        for size in ["小号", "中号", "大号"] {
+            app.buttons[size].tap()
+            let attachment = XCTAttachment(screenshot: app.screenshot())
+            attachment.name = "Widget preview - \(size)"
+            attachment.lifetime = .keepAlways
+            add(attachment)
+        }
+        app.buttons["widgetStylePicker"].tap()
+        app.buttons["信息矩阵"].tap()
+        for size in ["小号", "中号", "大号"] {
+            app.buttons[size].tap()
+            let attachment = XCTAttachment(screenshot: app.screenshot())
+            attachment.name = "Matrix widget preview - \(size)"
+            attachment.lifetime = .keepAlways
+            add(attachment)
+        }
+        app.buttons["小号"].tap()
+        app.buttons["widgetMetric-主指标"].tap()
+        app.buttons["存储"].tap()
+        XCTAssertTrue(app.staticTexts["可用"].firstMatch.exists || app.staticTexts.containing(NSPredicate(format: "label BEGINSWITH '可用 '")).firstMatch.exists)
+        app.terminate()
+        app.launch()
+        app.buttons["settingsButton"].tap()
+        if !app.buttons["widgetSettingsLink"].isHittable { app.swipeUp() }
+        app.buttons["widgetSettingsLink"].tap()
+        XCTAssertTrue(app.buttons["widgetMetric-主指标"].label.contains("存储"))
+        XCTAssertTrue(app.buttons["widgetStylePicker"].label.contains("信息矩阵"))
+        app.buttons["widgetMetric-主指标"].tap()
+        app.buttons["电池"].tap()
+    }
+
+    @MainActor func testWidgetAppearsInHomeScreenGallery() {
+        let app = XCUIApplication()
+        app.launch()
+        XCUIDevice.shared.press(.home)
+        let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
+        let icon = springboard.icons["系统状态"].firstMatch
+        XCTAssertTrue(icon.waitForExistence(timeout: 5))
+        icon.press(forDuration: 1.2)
+        for label in ["小型小组件", "中尺寸小组件", "大尺寸小组件"] {
+            XCTAssertTrue(springboard.buttons[label].exists)
+        }
+        springboard.buttons["中尺寸小组件"].tap()
+        XCUIDevice.shared.press(.home)
+        let widget = springboard.icons.matching(NSPredicate(format: "label == %@ AND value CONTAINS %@", "系统状态", "小组件")).firstMatch
+        XCTAssertTrue(widget.waitForExistence(timeout: 5))
+        if !springboard.frame.contains(widget.frame) { springboard.swipeLeft() }
+        XCTAssertTrue(springboard.frame.contains(widget.frame))
+        let state = XCTAttachment(string: springboard.debugDescription)
+        state.name = "Springboard installed widget"
+        state.lifetime = .keepAlways
+        add(state)
+        let screenshot = XCTAttachment(screenshot: springboard.screenshot())
+        screenshot.name = "Installed home widget"
+        screenshot.lifetime = .keepAlways
+        add(screenshot)
+    }
+
     @MainActor private func assertAllMetricsVisible(_ app: XCUIApplication) {
         let viewport = app.frame
         for name in ["cpu", "network", "memory", "storage", "battery", "thermal",

@@ -1,6 +1,18 @@
-# 发布记录 · 2026-10-27
+# 发布记录
 
-## 当前交付
+## 小组件更新 · 2026-10-28
+
+- 当前源码版本为 **1.1.0 (2)**，本次新增功能尚未上传或提交审核；下方 1.0.0 记录为上一次商店操作结果。
+- 新增 WidgetKit 扩展与 App Group。基础仪表盘、信息矩阵均支持小、中、大号，可在应用内预览与保存默认值，也可单独编辑各桌面实例的样式、四个指标、配色和时钟。
+- 信息矩阵参考用户提供的日期、时钟、电量条、存储环、设备轮廓和分区布局。采用公开接口读取的硬件标识与逻辑核心数，不填猜测芯片名称、蓝牙/蜂窝开关或设备开机时长。
+- 电池、内存、存储与温度状态随系统刷新读取；其余六类指标为最近 5 分钟内的 App 前台快照。时间线在快照到期时隐藏读数；刷新频率由 iOS 控制。磁盘数据不写入共享快照。
+- 应用和扩展均声明 UserDefaults App Group 原因 `1C8F.1`，应用保留自身设置原因 `CA92.1`；磁盘原因仍为 `E174.1`。应用内隐私/帮助与网页源文件同步更新。
+- iOS 18.5 / iPhone 16 Pro：10 项单元测试与 4 项 UI 测试通过（`artifacts/Tests-MatrixWidgets.xcresult`）。iPhone SE：10 项单元测试与 4 项 UI 测试通过（`artifacts/Tests-Widgets-SE-Final.xcresult`），覆盖六种尺寸与样式组合、保存重启、快照过期、旧设置兼容和首页交互。
+- Release 自动签名归档成功且签名校验通过：`artifacts/SystemStatus-1.1.0-Delivery.xcarchive`。App Store 分发导出失败：Xcode 报告 `No Accounts`；现有主应用商店描述文件缺少 App Group 权限，扩展缺少商店描述文件。需要在 Xcode 登录对应团队并刷新分发签名配置，尚未产生 1.1.0 分发 IPA。日志：`artifacts/archive-widgets-delivery.log`、`artifacts/export-widgets-delivery.log`。
+- 主屏幕实际添加中号小组件后定位至对应页面，确认容器可见；截图仍为加载占位，尚未验证桌面真实读数渲染。模拟器日志出现 AppIntent 帮助服务通信失败及空时间线错误，保留为待排查项；结果：`artifacts/Tests-Widget-Home-Final.xcresult`，日志：`artifacts/widget-runtime.log`。
+- 未进行真实 iPhone 的 WidgetKit 刷新周期与能耗验收，模拟器读数可能来自 Mac 宿主环境。
+
+## 首版交付记录 · 2026-10-27
 
 - 应用名称：系统状态
 - Bundle ID：com.chengwang.systemstatus

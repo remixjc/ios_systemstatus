@@ -2,6 +2,7 @@ import SwiftUI
 import Network
 import AVFAudio
 import Combine
+import WidgetKit
 
 @MainActor
 final class SystemMonitor: ObservableObject {
@@ -42,6 +43,10 @@ final class SystemMonitor: ObservableObject {
     private var active = false
     private var tick = 0
     private var lastScreen: UIScreen?
+    private var hasTrafficBaseline = false
+    private var lastWidgetWrite: Date?
+    private var lastWidgetReload: Date?
+    private(set) var widgetSnapshot: WidgetAppSnapshot?
 
     init() {
         let saved = UserDefaults.standard.double(forKey: "refreshInterval")
@@ -67,10 +72,12 @@ final class SystemMonitor: ObservableObject {
         active = value
         if value {
             sampler.reset()
+            hasTrafficBaseline = false
             reader.resetCPU()
             sample()
             schedule()
         } else {
+            publishWidget(force: true)
             timer?.invalidate()
             timer = nil
             download = 0
@@ -81,10 +88,12 @@ final class SystemMonitor: ObservableObject {
     func togglePause() {
         paused.toggle()
         sampler.reset()
+        hasTrafficBaseline = false
         reader.resetCPU()
         download = 0
         upload = 0
         if !paused { sample() }
+        publishWidget(force: true)
     }
 
     func clearHistory() {
@@ -93,6 +102,13 @@ final class SystemMonitor: ObservableObject {
         received = 0
         sent = 0
         sampler.reset()
+        hasTrafficBaseline = false
+        widgetSnapshot = widgetSnapshot.map {
+            WidgetAppSnapshot(date: $0.date, cpu: $0.cpu, download: nil, upload: nil,
+                              connection: $0.connection, brightness: $0.brightness,
+                              volume: $0.volume, sessionDuration: $0.sessionDuration)
+        }
+        publishWidget(force: true)
     }
 
     private func schedule() {
@@ -141,6 +157,25 @@ final class SystemMonitor: ObservableObject {
         volume = Double(audio.outputVolume)
         audioRoute = audio.currentRoute.outputs.map(\.portName).joined(separator: "、")
         if audioRoute.isEmpty { audioRoute = "系统音频输出" }
+        widgetSnapshot = WidgetAppSnapshot(date: now, cpu: cpu?.total,
+                                          download: hasTrafficBaseline ? download : nil,
+                                          upload: hasTrafficBaseline ? upload : nil,
+                                          connection: connection, brightness: brightness, volume: volume,
+                                          sessionDuration: now.timeIntervalSince(startedAt))
+        hasTrafficBaseline = true
+        publishWidget()
+    }
+
+    private func publishWidget(force: Bool = false) {
+        guard let widgetSnapshot else { return }
+        let date = Date()
+        if force || lastWidgetWrite.map({ date.timeIntervalSince($0) >= 15 }) ?? true {
+            if WidgetStore.save(widgetSnapshot) { lastWidgetWrite = date }
+        }
+        if force || lastWidgetReload.map({ date.timeIntervalSince($0) >= 60 }) ?? true {
+            WidgetCenter.shared.reloadTimelines(ofKind: WidgetStore.kind)
+            lastWidgetReload = date
+        }
     }
 
     var thermalText: String {

@@ -9,13 +9,27 @@
 /* Begin PBXBuildFile section */
 		08956883A0E3E63BCB658552 /* SystemStatusApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EF67871D2E0E28286AA6D5D /* SystemStatusApp.swift */; };
 		0FB8ECB2282457FAD78F1457 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 33F0D29B1E23E4F0CD48C535 /* PrivacyInfo.xcprivacy */; };
+		12D7FEFBBCBD6F9FE5330012 /* WidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDBCCA41C6D20FE9F081BE8 /* WidgetData.swift */; };
+		4A9D05E720DFBEE8826DC90E /* SystemStatusWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B2D2E0FD84393B1B23BCCAEA /* SystemStatusWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4B674A366B030695BFC15A06 /* WidgetDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831490D8009D152BF8C55FD8 /* WidgetDashboardView.swift */; };
+		543A9245EB8C5DDCD21366E1 /* WidgetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 360F3902498A25A70579EFE8 /* WidgetTests.swift */; };
+		553F68445CE462E7FC75358B /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2AC50379082B235D9F20EF /* Metrics.swift */; };
 		56051D2A3EACCF2CC4663960 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFFA675206B77FEEE49356F3 /* DashboardView.swift */; };
+		65B82D07C6D52EB146420462 /* SystemReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E631A3BF2DB89C70CB97B55 /* SystemReader.swift */; };
+		6667488F49BF10360670657E /* WidgetData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DDBCCA41C6D20FE9F081BE8 /* WidgetData.swift */; };
+		75B34DD9BEB0805BE973B04F /* MatrixWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18523E2A960CF49D32F2020 /* MatrixWidgetView.swift */; };
+		79935D320858684C6F56ADF4 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 4C3B95C26915446E762B0156 /* PrivacyInfo.xcprivacy */; };
 		7A080F9472E910592CEC89F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1846C000797C6E9AF45B79FA /* Assets.xcassets */; };
+		815B5663E83B3F09183BEA8A /* ConfigurationIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD877442BFB9C82D24B686F5 /* ConfigurationIntent.swift */; };
 		86557063CDE5ED35E3FE0112 /* SystemReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E631A3BF2DB89C70CB97B55 /* SystemReader.swift */; };
 		8AB25BAFB39B52E9D1DB0A3A /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 547CEB5AD302A0A14F519FDE /* Components.swift */; };
+		8AFC97F384069080D4F7DA15 /* WidgetSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAF286CFB580F98D5D55436B /* WidgetSettingsView.swift */; };
 		9C2149D8053BB1D8A6CE16BA /* SystemStatusUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A0CAA78E7096BCA60F9693 /* SystemStatusUITests.swift */; };
+		ABCD90D387C45831FAAD1B4F /* WidgetDashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831490D8009D152BF8C55FD8 /* WidgetDashboardView.swift */; };
 		AE6E47518D001C596416A602 /* SystemMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3CD8D52FA2C3308ADE3DB68 /* SystemMonitor.swift */; };
+		B7757E8067B14AD461945310 /* SystemStatusWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B0ED957EA097882EA38AE1 /* SystemStatusWidget.swift */; };
 		C1C0BCE3C4907D35C3660080 /* Metrics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A2AC50379082B235D9F20EF /* Metrics.swift */; };
+		D11D33D2BC3ABBE65173FCBD /* MatrixWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B18523E2A960CF49D32F2020 /* MatrixWidgetView.swift */; };
 		ED846510C2FB62D34B878C6C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE47DDD35CC4E1145211A6CE /* SettingsView.swift */; };
 		F96241351E1CAE8AE477D0F7 /* MetricDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080A549240761C4BC2FA7DF0 /* MetricDetailView.swift */; };
 		F9ED28A25CA5CBD724FBEB26 /* MetricsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB281F5650217EF5917794D /* MetricsTests.swift */; };
@@ -36,7 +50,28 @@
 			remoteGlobalIDString = 400E7EB39DE32AA5D8F936AD;
 			remoteInfo = SystemStatus;
 		};
+		F3E3E729DAFF8BC9BC4CC42D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C953704E53A972FB522606C6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 889B021DC7FAB920513E5877;
+			remoteInfo = SystemStatusWidget;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4BEACDF37472B1FF5624699B /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				4A9D05E720DFBEE8826DC90E /* SystemStatusWidget.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		080A549240761C4BC2FA7DF0 /* MetricDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricDetailView.swift; sourceTree = "<group>"; };
@@ -44,15 +79,27 @@
 		1846C000797C6E9AF45B79FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1EF67871D2E0E28286AA6D5D /* SystemStatusApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemStatusApp.swift; sourceTree = "<group>"; };
 		33F0D29B1E23E4F0CD48C535 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		360F3902498A25A70579EFE8 /* WidgetTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetTests.swift; sourceTree = "<group>"; };
+		38B0ED957EA097882EA38AE1 /* SystemStatusWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemStatusWidget.swift; sourceTree = "<group>"; };
 		3E631A3BF2DB89C70CB97B55 /* SystemReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemReader.swift; sourceTree = "<group>"; };
+		4C3B95C26915446E762B0156 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		547CEB5AD302A0A14F519FDE /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
+		5DF849CBAF8BC73CA3423264 /* SystemStatusWidget.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SystemStatusWidget.entitlements; sourceTree = "<group>"; };
 		6A2AC50379082B235D9F20EF /* Metrics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Metrics.swift; sourceTree = "<group>"; };
 		6B0B1796BCAAFC3ECC164077 /* SystemStatusUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = SystemStatusUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		831490D8009D152BF8C55FD8 /* WidgetDashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetDashboardView.swift; sourceTree = "<group>"; };
+		8DDBCCA41C6D20FE9F081BE8 /* WidgetData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetData.swift; sourceTree = "<group>"; };
+		A89AE3746B864E4CCC05A2C4 /* SystemStatus.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SystemStatus.entitlements; sourceTree = "<group>"; };
 		AE47DDD35CC4E1145211A6CE /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		AEB281F5650217EF5917794D /* MetricsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetricsTests.swift; sourceTree = "<group>"; };
+		B18523E2A960CF49D32F2020 /* MatrixWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatrixWidgetView.swift; sourceTree = "<group>"; };
+		B2D2E0FD84393B1B23BCCAEA /* SystemStatusWidget.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = SystemStatusWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		BD877442BFB9C82D24B686F5 /* ConfigurationIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationIntent.swift; sourceTree = "<group>"; };
 		BFFA675206B77FEEE49356F3 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		C81C1D2AC5EE69329F3FE094 /* SystemStatusTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = SystemStatusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAF286CFB580F98D5D55436B /* WidgetSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetSettingsView.swift; sourceTree = "<group>"; };
 		D6A0CAA78E7096BCA60F9693 /* SystemStatusUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemStatusUITests.swift; sourceTree = "<group>"; };
+		F0E5306770704BA6E2B2737F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F3CD8D52FA2C3308ADE3DB68 /* SystemMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemMonitor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -61,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				AEB281F5650217EF5917794D /* MetricsTests.swift */,
+				360F3902498A25A70579EFE8 /* WidgetTests.swift */,
 			);
 			path = SystemStatusTests;
 			sourceTree = "<group>";
@@ -72,6 +120,18 @@
 				3E631A3BF2DB89C70CB97B55 /* SystemReader.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		775160637108F21D6FD72574 /* SystemStatusWidget */ = {
+			isa = PBXGroup;
+			children = (
+				BD877442BFB9C82D24B686F5 /* ConfigurationIntent.swift */,
+				F0E5306770704BA6E2B2737F /* Info.plist */,
+				4C3B95C26915446E762B0156 /* PrivacyInfo.xcprivacy */,
+				5DF849CBAF8BC73CA3423264 /* SystemStatusWidget.entitlements */,
+				38B0ED957EA097882EA38AE1 /* SystemStatusWidget.swift */,
+			);
+			path = SystemStatusWidget;
 			sourceTree = "<group>";
 		};
 		82A57B048F5668ED81CA9689 /* Models */ = {
@@ -99,12 +159,23 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		9DE2FE3E023A4FFF483EE377 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				B18523E2A960CF49D32F2020 /* MatrixWidgetView.swift */,
+				831490D8009D152BF8C55FD8 /* WidgetDashboardView.swift */,
+				8DDBCCA41C6D20FE9F081BE8 /* WidgetData.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		E381BE087D528C3D0C82EC0D /* Products */ = {
 			isa = PBXGroup;
 			children = (
 				0FCBC4E70292B7782D3198AD /* SystemStatus.app */,
 				C81C1D2AC5EE69329F3FE094 /* SystemStatusTests.xctest */,
 				6B0B1796BCAAFC3ECC164077 /* SystemStatusUITests.xctest */,
+				B2D2E0FD84393B1B23BCCAEA /* SystemStatusWidget.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -116,6 +187,7 @@
 				BFFA675206B77FEEE49356F3 /* DashboardView.swift */,
 				080A549240761C4BC2FA7DF0 /* MetricDetailView.swift */,
 				AE47DDD35CC4E1145211A6CE /* SettingsView.swift */,
+				CAF286CFB580F98D5D55436B /* WidgetSettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -131,9 +203,11 @@
 		FAECB18EE1F07EF91669F303 = {
 			isa = PBXGroup;
 			children = (
+				9DE2FE3E023A4FFF483EE377 /* Shared */,
 				FD7381A5AD2B2C00527F0661 /* SystemStatus */,
 				06D4299FC7BE8AD34322A382 /* SystemStatusTests */,
 				E7842F62AC1003039B808322 /* SystemStatusUITests */,
+				775160637108F21D6FD72574 /* SystemStatusWidget */,
 				E381BE087D528C3D0C82EC0D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -141,6 +215,7 @@
 		FD7381A5AD2B2C00527F0661 /* SystemStatus */ = {
 			isa = PBXGroup;
 			children = (
+				A89AE3746B864E4CCC05A2C4 /* SystemStatus.entitlements */,
 				87A33470A377F7A563109D6C /* App */,
 				82A57B048F5668ED81CA9689 /* Models */,
 				8A6B843CC4B782BEDD4FC818 /* Resources */,
@@ -177,10 +252,12 @@
 			buildPhases = (
 				2E919B0DAE9B522DEAAA99F5 /* Sources */,
 				AEFB21197D9D7B21D57D3279 /* Resources */,
+				4BEACDF37472B1FF5624699B /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				975EEF5C644CE5D30969308F /* PBXTargetDependency */,
 			);
 			name = SystemStatus;
 			packageProductDependencies = (
@@ -188,6 +265,24 @@
 			productName = SystemStatus;
 			productReference = 0FCBC4E70292B7782D3198AD /* SystemStatus.app */;
 			productType = "com.apple.product-type.application";
+		};
+		889B021DC7FAB920513E5877 /* SystemStatusWidget */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F4501628FD187A098DEEDC9B /* Build configuration list for PBXNativeTarget "SystemStatusWidget" */;
+			buildPhases = (
+				8D89DF6016B3FAC7433A4213 /* Sources */,
+				080EEBD3798F1B72490F1960 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SystemStatusWidget;
+			packageProductDependencies = (
+			);
+			productName = SystemStatusWidget;
+			productReference = B2D2E0FD84393B1B23BCCAEA /* SystemStatusWidget.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 		A02AC7F752899DE0DDC1A6EF /* SystemStatusUITests */ = {
 			isa = PBXNativeTarget;
@@ -224,6 +319,10 @@
 						DevelopmentTeam = 6NZHLN3MUD;
 						ProvisioningStyle = Automatic;
 					};
+					889B021DC7FAB920513E5877 = {
+						DevelopmentTeam = 6NZHLN3MUD;
+						ProvisioningStyle = Automatic;
+					};
 					A02AC7F752899DE0DDC1A6EF = {
 						DevelopmentTeam = 6NZHLN3MUD;
 						ProvisioningStyle = Automatic;
@@ -246,6 +345,7 @@
 			projectRoot = "";
 			targets = (
 				400E7EB39DE32AA5D8F936AD /* SystemStatus */,
+				889B021DC7FAB920513E5877 /* SystemStatusWidget */,
 				0F39FB52E68BF556CCAA7C7B /* SystemStatusTests */,
 				A02AC7F752899DE0DDC1A6EF /* SystemStatusUITests */,
 			);
@@ -253,6 +353,14 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		080EEBD3798F1B72490F1960 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				79935D320858684C6F56ADF4 /* PrivacyInfo.xcprivacy in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		AEFB21197D9D7B21D57D3279 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -270,6 +378,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9ED28A25CA5CBD724FBEB26 /* MetricsTests.swift in Sources */,
+				543A9245EB8C5DDCD21366E1 /* WidgetTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,12 +396,30 @@
 			files = (
 				8AB25BAFB39B52E9D1DB0A3A /* Components.swift in Sources */,
 				56051D2A3EACCF2CC4663960 /* DashboardView.swift in Sources */,
+				D11D33D2BC3ABBE65173FCBD /* MatrixWidgetView.swift in Sources */,
 				F96241351E1CAE8AE477D0F7 /* MetricDetailView.swift in Sources */,
 				C1C0BCE3C4907D35C3660080 /* Metrics.swift in Sources */,
 				ED846510C2FB62D34B878C6C /* SettingsView.swift in Sources */,
 				AE6E47518D001C596416A602 /* SystemMonitor.swift in Sources */,
 				86557063CDE5ED35E3FE0112 /* SystemReader.swift in Sources */,
 				08956883A0E3E63BCB658552 /* SystemStatusApp.swift in Sources */,
+				4B674A366B030695BFC15A06 /* WidgetDashboardView.swift in Sources */,
+				6667488F49BF10360670657E /* WidgetData.swift in Sources */,
+				8AFC97F384069080D4F7DA15 /* WidgetSettingsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D89DF6016B3FAC7433A4213 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				815B5663E83B3F09183BEA8A /* ConfigurationIntent.swift in Sources */,
+				75B34DD9BEB0805BE973B04F /* MatrixWidgetView.swift in Sources */,
+				553F68445CE462E7FC75358B /* Metrics.swift in Sources */,
+				65B82D07C6D52EB146420462 /* SystemReader.swift in Sources */,
+				B7757E8067B14AD461945310 /* SystemStatusWidget.swift in Sources */,
+				ABCD90D387C45831FAAD1B4F /* WidgetDashboardView.swift in Sources */,
+				12D7FEFBBCBD6F9FE5330012 /* WidgetData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,6 +430,11 @@
 			isa = PBXTargetDependency;
 			target = 400E7EB39DE32AA5D8F936AD /* SystemStatus */;
 			targetProxy = 9ABFCB1C5A99A74DB63AA30A /* PBXContainerItemProxy */;
+		};
+		975EEF5C644CE5D30969308F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 889B021DC7FAB920513E5877 /* SystemStatusWidget */;
+			targetProxy = F3E3E729DAFF8BC9BC4CC42D /* PBXContainerItemProxy */;
 		};
 		ED7E4FA25F179E487283354C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -326,6 +458,25 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = SystemStatus;
+			};
+			name = Debug;
+		};
+		3619274C1798A0076172F5E0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = SystemStatusWidget/SystemStatusWidget.entitlements;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SystemStatusWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.chengwang.systemstatus.widgets;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -364,7 +515,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 6NZHLN3MUD;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -384,7 +535,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -431,7 +582,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 6NZHLN3MUD;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -445,7 +596,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.1.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -453,6 +604,25 @@
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		A60DC7D4F56F7CA2F816B336 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_ENTITLEMENTS = SystemStatusWidget/SystemStatusWidget.entitlements;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SystemStatusWidget/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.chengwang.systemstatus.widgets;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -494,6 +664,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SystemStatus/SystemStatus.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "系统状态";
@@ -517,6 +688,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SystemStatus/SystemStatus.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "系统状态";
@@ -588,6 +760,15 @@
 			buildConfigurations = (
 				EC1EF89F80C07D4D39705F0B /* Debug */,
 				D2E58EC870E91E845C840BA6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F4501628FD187A098DEEDC9B /* Build configuration list for PBXNativeTarget "SystemStatusWidget" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3619274C1798A0076172F5E0 /* Debug */,
+				A60DC7D4F56F7CA2F816B336 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
