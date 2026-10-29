@@ -1,6 +1,5 @@
 import SwiftUI
 import Network
-import AVFAudio
 import Combine
 import WidgetKit
 
@@ -20,8 +19,9 @@ final class SystemMonitor: ObservableObject {
     @Published var thermal = ProcessInfo.processInfo.thermalState
     @Published var lowPower = ProcessInfo.processInfo.isLowPowerModeEnabled
     @Published var brightness: Double = 0
-    @Published var volume: Double = 0
+    @Published var volume: Double?
     @Published var audioRoute = "系统音频输出"
+    @Published var audioError: String?
     @Published var connection = "检测中"
     @Published var connected = false
     @Published var expensive = false
@@ -36,7 +36,9 @@ final class SystemMonitor: ObservableObject {
     }
     let startedAt = Date()
     let hardware = SystemReader.hardwareIdentifier
+    let device = DeviceIdentity.current
     private let reader = SystemReader()
+    private let audioOutput: AudioOutputSource
     private let pathMonitor = NWPathMonitor()
     private var sampler = TrafficSampler()
     private var timer: Timer?
@@ -48,9 +50,11 @@ final class SystemMonitor: ObservableObject {
     private var lastWidgetReload: Date?
     private(set) var widgetSnapshot: WidgetAppSnapshot?
 
-    init() {
+    init(audioOutput: AudioOutputSource? = nil) {
+        self.audioOutput = audioOutput ?? AudioOutputMonitor()
         let saved = UserDefaults.standard.double(forKey: "refreshInterval")
         interval = [0.5, 1, 2].contains(saved) ? saved : 1
+        self.audioOutput.onChange = { [weak self] reading in self?.updateAudio(reading) }
         UIDevice.current.isBatteryMonitoringEnabled = true
         pathMonitor.pathUpdateHandler = { [weak self] path in
             Task { @MainActor [weak self] in
@@ -71,6 +75,7 @@ final class SystemMonitor: ObservableObject {
         guard active != value else { return }
         active = value
         if value {
+            audioOutput.start()
             sampler.reset()
             hasTrafficBaseline = false
             reader.resetCPU()
@@ -78,6 +83,7 @@ final class SystemMonitor: ObservableObject {
             schedule()
         } else {
             publishWidget(force: true)
+            audioOutput.stop()
             timer?.invalidate()
             timer = nil
             download = 0
@@ -121,6 +127,8 @@ final class SystemMonitor: ObservableObject {
 
     private func sample() {
         now = Date()
+        // Volume stays live even while CPU/network sampling is paused.
+        if active { audioOutput.refresh() }
         guard !paused else { return }
         cpu = reader.cpu()
         memory = reader.memory()
@@ -153,10 +161,6 @@ final class SystemMonitor: ObservableObject {
             lastScreen = screen
             brightness = Double(screen.brightness)
         }
-        let audio = AVAudioSession.sharedInstance()
-        volume = Double(audio.outputVolume)
-        audioRoute = audio.currentRoute.outputs.map(\.portName).joined(separator: "、")
-        if audioRoute.isEmpty { audioRoute = "系统音频输出" }
         widgetSnapshot = WidgetAppSnapshot(date: now, cpu: cpu?.total,
                                           download: hasTrafficBaseline ? download : nil,
                                           upload: hasTrafficBaseline ? upload : nil,
@@ -164,6 +168,21 @@ final class SystemMonitor: ObservableObject {
                                           sessionDuration: now.timeIntervalSince(startedAt))
         hasTrafficBaseline = true
         publishWidget()
+    }
+
+    private func updateAudio(_ reading: AudioOutputReading) {
+        guard active else { return }
+        let changed = volume != reading.volume || audioRoute != reading.route || audioError != reading.error
+        volume = reading.volume
+        audioRoute = reading.route
+        audioError = reading.error
+        guard changed, let snapshot = widgetSnapshot else { return }
+        // Preserve the sampling date: a volume event must not make old CPU/network data fresh.
+        widgetSnapshot = WidgetAppSnapshot(date: snapshot.date, cpu: snapshot.cpu,
+                                          download: snapshot.download, upload: snapshot.upload,
+                                          connection: snapshot.connection, brightness: snapshot.brightness,
+                                          volume: volume, sessionDuration: snapshot.sessionDuration)
+        publishWidget(force: true)
     }
 
     private func publishWidget(force: Bool = false) {
@@ -197,7 +216,8 @@ final class SystemMonitor: ObservableObject {
         """
         系统状态 · 本地监测报告
         生成时间：\(now.formatted(date: .numeric, time: .standard))
-        设备：\(UIDevice.current.model) · \(hardware)
+        设备：\(device.modelName) · \(hardware)
+        芯片：\(device.chipName ?? "暂未收录")
         系统：\(UIDevice.current.systemName) \(UIDevice.current.systemVersion)
         处理器：\(ProcessInfo.processInfo.processorCount) 核心
         CPU 用户：\(cpu.map { String(format: "%.1f%%", $0.user) } ?? "不可用")

@@ -1,6 +1,25 @@
 import XCTest
 
 final class SystemStatusUITests: XCTestCase {
+    @MainActor func testDeviceDetailsShowModelAndChip() {
+        let app = XCUIApplication()
+        app.launch()
+        let device = app.buttons["metric-device"]
+        XCTAssertTrue(device.waitForExistence(timeout: 5))
+        device.tap()
+        XCTAssertTrue(app.staticTexts["手机型号"].waitForExistence(timeout: 3))
+        XCTAssertTrue(app.staticTexts["芯片"].exists)
+        let screenshot = XCTAttachment(screenshot: app.screenshot())
+        screenshot.name = "Device model and chip"
+        screenshot.lifetime = .keepAlways
+        add(screenshot)
+        app.buttons["detailDone"].tap()
+        app.buttons["metric-audio"].tap()
+        XCTAssertTrue(app.staticTexts["系统输出音量"].waitForExistence(timeout: 3))
+        XCTAssertTrue(app.staticTexts["音频路由"].exists)
+        app.buttons["detailDone"].tap()
+    }
+
     @MainActor func testWidgetSizesAndSavedSettings() {
         let app = XCUIApplication()
         app.launch()

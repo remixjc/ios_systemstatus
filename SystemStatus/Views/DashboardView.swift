@@ -110,12 +110,13 @@ struct DashboardView: View {
             }
             metricButton(.audio) {
                 SmallMetricCard(title: "音量", icon: "headphones",
-                    value: Format.percent(monitor.volume), subtitle: monitor.audioRoute,
+                    value: monitor.volume.map(Format.percent) ?? "—", subtitle: monitor.audioRoute,
                     color: Palette.blue, gauge: monitor.volume)
             }
             metricButton(.device) {
                 SmallMetricCard(title: "设备", icon: "iphone",
-                    value: UIDevice.current.model, subtitle: "iOS \(UIDevice.current.systemVersion)")
+                    value: monitor.device.modelName, subtitle: monitor.device.chipName ?? "芯片暂未收录",
+                    valueFontSize: 14, valueLineLimit: 2)
             }
         }
     }

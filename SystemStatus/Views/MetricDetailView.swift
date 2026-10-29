@@ -33,6 +33,7 @@ struct MetricDetailView: View {
     @ViewBuilder private var readings: some View {
         switch metric {
         case .cpu:
+            row("芯片", monitor.device.chipName ?? "暂未收录")
             row("总使用率", monitor.cpu.map { String(format: "%.1f%%", $0.total) } ?? "暂不可用")
             row("用户", monitor.cpu.map { String(format: "%.1f%%", $0.user) } ?? "暂不可用")
             row("系统", monitor.cpu.map { String(format: "%.1f%%", $0.system) } ?? "暂不可用")
@@ -76,16 +77,18 @@ struct MetricDetailView: View {
             row("当前亮度", Format.percent(monitor.brightness))
             row("屏幕", monitor.screenDescription)
         case .audio:
-            row("系统输出音量", Format.percent(monitor.volume))
+            row("系统输出音量", monitor.volume.map(Format.percent) ?? "不可用")
             row("音频路由", monitor.audioRoute)
+            if let error = monitor.audioError { row("读取状态", error) }
         case .device:
-            row("设备类型", UIDevice.current.model)
+            row("手机型号", monitor.device.modelName)
+            row("芯片", monitor.device.chipName ?? "暂未收录")
             row("硬件标识", monitor.hardware)
             row("系统版本", "\(UIDevice.current.systemName) \(UIDevice.current.systemVersion)")
             row("物理内存", Format.bytes(Double(ProcessInfo.processInfo.physicalMemory)))
             row("处理器核心", "\(ProcessInfo.processInfo.processorCount)")
             row("当前屏幕", monitor.screenDescription)
-            row("应用版本", "1.0.0 (1)")
+            row("应用版本", "\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "—") (\(Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "—"))")
         }
     }
 
@@ -108,9 +111,9 @@ struct MetricDetailView: View {
         case .brightness:
             "读取当前活动窗口所在屏幕的相对亮度，范围为 0–100%。此值不是实际亮度的尼特数，也不包含环境光和 HDR 带来的变化。展开、折叠和切换屏幕后会重新读取当前屏幕。"
         case .audio:
-            "读取 AVAudioSession 的系统输出音量及公开音频路由信息。不录音、不申请麦克风权限，也不激活或中断其他应用的音频会话。实际输出设备和音量以系统控制中心为准。"
+            "监听 AVAudioSession 输出音量变化；返回前台、切换耳机或中断结束时重新读取，暂停 CPU/网络采样不影响音量显示。前台使用可与其他应用音频混合的环境会话，不播放音频、不录音、不申请麦克风权限。显示的是媒体输出音量，不是铃声或通话音量。桌面小组件仍由 iOS 安排刷新。"
         case .device:
-            "设备标识来自系统公开接口。不采集序列号、IMEI、广告标识符或设备名称。不根据未知机型编号猜测芯片营销名称。界面按当前窗口可用宽度布局，不依赖固定设备尺寸。"
+            "硬件标识来自系统公开接口，手机型号和芯片名称使用本地对照表展示；未收录的机型保留硬件标识，芯片显示暂未收录。模拟器展示模拟机型对应的名称，性能读数仍可能来自 Mac 宿主机。不采集序列号、IMEI、广告标识符或用户设置的设备名称。"
         }
     }
 }

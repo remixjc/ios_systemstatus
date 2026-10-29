@@ -199,12 +199,12 @@ struct MatrixWidgetView: View {
     }
 
     private func deviceTile(compact: Bool) -> some View {
-        VStack(spacing: compact ? 2 : 5) {
-            Text(UIDevice.current.model).font(.system(size: compact ? 11 : 15, weight: .medium))
-            Text("\(ProcessInfo.processInfo.processorCount) 核心")
+        let device = DeviceIdentity.current
+        return VStack(spacing: compact ? 2 : 5) {
+            Text(device.modelName).font(.system(size: compact ? 10 : 13, weight: .medium))
+                .lineLimit(2)
+            Text(device.chipName ?? "芯片暂未收录")
                 .font(.system(size: compact ? 10 : 18, weight: .semibold))
-            Text(SystemReader.hardwareIdentifier)
-                .font(.system(size: compact ? 7 : 8)).foregroundStyle(.white.opacity(0.6))
         }.lineLimit(1).minimumScaleFactor(0.6)
             .padding(4).frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(tileColor, in: RoundedRectangle(cornerRadius: compact ? 12 : 18))

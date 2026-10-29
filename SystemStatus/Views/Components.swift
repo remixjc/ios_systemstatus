@@ -158,15 +158,17 @@ struct SmallMetricCard: View {
     let subtitle: String
     var color: Color = .white
     var gauge: Double? = nil
+    var valueFontSize: CGFloat = 20
+    var valueLineLimit: Int = 1
     var body: some View {
         VStack(alignment: .leading, spacing: 7) {
             CardHeading(title: title, icon: icon, color: .white.opacity(0.8))
             HStack(alignment: .center, spacing: 4) {
-                Text(value).font(.system(size: 20, weight: .bold, design: .rounded))
+                Text(value).font(.system(size: valueFontSize, weight: .bold, design: .rounded))
                     .foregroundStyle(color)
                     .monospacedDigit()
                     .minimumScaleFactor(0.65)
-                    .lineLimit(1)
+                    .lineLimit(valueLineLimit)
                 Spacer(minLength: 0)
                 if let gauge { MiniGauge(value: gauge, color: color) }
             }
